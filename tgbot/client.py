@@ -11,7 +11,7 @@ from aiogram.types import Message
 from aiogram.utils.markdown import hbold
 from aiogram.types import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 
-from config import TOKEN
+from client.config import TOKEN
 
 # All handlers should be attached to the Router (or Dispatcher)
 dp = Dispatcher()
