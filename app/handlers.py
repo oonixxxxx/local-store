@@ -1,15 +1,13 @@
 from aiogram import F, Router
-from aiogram import types
-from aiogram.filters import CommandStart, Command
-from aiogram.types import Message
+
+from aiogram.filters import CommandStart
 from aiogram.utils.markdown import hbold
-from aiogram.types import ReplyKeyboardRemove
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, Message
 from aiogram.types.input_file import FSInputFile
 
 
-menu_button = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='Корзина')],
-                                     [KeyboardButton(text='Информация о нас'), KeyboardButton(text='Контакт')]],
+menu_button = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='Корзина 🛒')],
+                                     [KeyboardButton(text='Информация о нас 📃✏️'), KeyboardButton(text='Контакт 📰')]],
         resize_keyboard=True,
         input_field_placeholder='Выберите пунт меню.')
 
@@ -35,12 +33,12 @@ async def command_start_handler(message: Message) -> None:
                          reply_markup=menu_button)
 
 
-@router.message(F.text == 'Информация о нас')
+@router.message(F.text == 'Информация о нас 📃✏️')
 async def getcatalog(message: Message):
     await message.answer('info about us')
 
 
-@router.message(F.text == 'Корзина')
+@router.message(F.text == 'Корзина 🛒')
 async def get_busket(message: Message):
     await message.answer('функционал корзины',reply_markup=busket_button)
 
@@ -56,7 +54,7 @@ async def go_to_pay(message: Message):
 
 #!идея: функция отправки чека им артикула администратору для отправки input: name, adress, check_photo
 
-@router.message(F.text == 'Контакт')
+@router.message(F.text == 'Контакт 📰')
 async def get_contact(message: Message):
     await message.answer('Функция контакты')
 
