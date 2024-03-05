@@ -9,6 +9,8 @@ from aiogram.types.input_file import FSInputFile
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.context import FSMContext
 
+from articuls import dictionary_of_articuls
+
 class Reg(StatesGroup):
     name = State()
     number = State()
