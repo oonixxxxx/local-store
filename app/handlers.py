@@ -28,6 +28,7 @@ menu_button = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='Корзина
 
 
 busket_button = ReplyKeyboardMarkup(keyboard=[
+    [KeyboardButton(text='В меню')],
     [KeyboardButton(text='Добавить товар'), KeyboardButton(text='Перейти к оплате')]],
     resize_keyboard=True)
 
