@@ -41,6 +41,12 @@ add_item_button = ReplyKeyboardMarkup(keyboard=[
     input_field_placeholder='Введите артикуль')
 
 
+verifcation = ReplyKeyboardMarkup(keyboard=[
+    [KeyboardButton(text='Да, это мои данные'), KeyboardButton(text='Нет, я хочу переписать их')]],
+    resize_keyboard=True,
+    input_field_placeholder='Выбирите ваш вариант'
+)
+
 router = Router()
 catalog_photo = FSInputFile('demo.jpg')
 
@@ -70,6 +76,7 @@ async def add_item(message: Message, state: FSMContext):
 @router.message(F.text == 'Перейти к оплате')
 async def go_to_pay(message: Message):
     await message.answer('Ссылка на страцницу с оплатой')
+    await message.answer('Для ввода данных напишите "/reg"')
 
 #!идея: функция отправки чека им артикула администратору для отправки input: name, adress, check_photo
 
@@ -82,11 +89,12 @@ async def get_contact(message: Message):
 async def get_menu(message: Message):
     await message.answer('you in menu', reply_markup=menu_button)
 
+
+
 '''
 docstring
 Функци я которая принимает значение '/reg' и принимает паеременные adress, name и записывает их в переменные
 '''
-
 @router.message(Command('reg'))
 async def reg_one(message: Message, state: FSMContext):
     await state.set_state(Reg.name)
@@ -111,3 +119,13 @@ async def second_three(message: Message, state: FSMContext):
     data = await state.get_data() #{'name': 'your name', 'number': 'number'}
     name = data['name']
     adress = data['number']
+    
+    await message.answer(f'Подтвердите ваши данные: \n Ваше имя: {name}, ваш адресс: {adress}', reply_markup=verifcation)
+
+
+'''verifcation function'''
+@router.message(F.text == 'Да, это мои данные')
+async def verification_true(message: Message):
+    await message.answer('Добавьте чек с оплаты')
+    await message.answer('Ваши данные собираются...')
+    await message.answer('Анкета с его данными')
