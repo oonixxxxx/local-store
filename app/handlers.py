@@ -1,3 +1,4 @@
+from email import message
 from os import name
 from aiogram import F, Router
 
@@ -102,14 +103,8 @@ async def getcatalog(message: Message):
 async def get_busket(message: Message):
     await message.answer('Выбирите действия из доступных, для поиска товаров, их описания и артиклей переходите в нашу группу https://vk.******',reply_markup=Buttons.busket_button)
 
-
-@router.message(commands=['add_item'])
-async def add_item(message: Message):
-    global item
-
-    await message.answer('Введите артикуль')
-    item = message.text
-    await message.answer(f'Ваш товар {Articules.articules_dict_name[str(articul)]} по стоимости - {Articules.articules_dict_prize[str(Articules.articules_dict_name[str(articul)])]}')
+    
+#    await message.answer(f'Ваш товар {Articules.articules_dict_name[str(articul)]} по стоимости - {Articules.articules_dict_prize[str(Articules.articules_dict_name[str(articul)])]}')
 
 
 @router.message(F.text == 'Перейти к оплате')
