@@ -1,4 +1,3 @@
-from ipaddress import AddressValueError
 from os import name
 from aiogram import F, Router
 
@@ -8,8 +7,6 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, Message
 from aiogram.types.input_file import FSInputFile
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.context import FSMContext
-
-from articuls import dictionary_of_articuls
 
 class Reg(StatesGroup):
     name = State()
@@ -78,7 +75,6 @@ async def go_to_pay(message: Message):
     await message.answer('Ссылка на страцницу с оплатой')
     await message.answer('Для ввода данных напишите "/reg"')
 
-#!идея: функция отправки чека им артикула администратору для отправки input: name, adress, check_photo
 
 @router.message(F.text == 'Контакт 📰')
 async def get_contact(message: Message):
@@ -89,6 +85,16 @@ async def get_contact(message: Message):
 async def get_menu(message: Message):
     await message.answer('you in menu', reply_markup=Buttons.menu_button)
 
+@router.message(F.text == 'Да, это мои данные')
+async def verification_true(message: Message):
+    await message.answer('Добавьте чек с оплаты')
+    await message.answer('Ваши данные собираются...')
+    await message.answer('Анкета с его данными')
+
+
+@router.message(F.text == 'Нет, я хочу переписать их')
+async def not_true_verification(message: Message):
+    await message.answer('Введите "/reg", чтобы перезаписать ваши данные')
 
 
 '''
@@ -121,11 +127,3 @@ async def second_three(message: Message, state: FSMContext):
     adress = data['number']
     
     await message.answer(f'Подтвердите ваши данные: \n Ваше имя: {name}, ваш адресс: {adress}', reply_markup=Buttons.verifcation)
-
-
-'''verifcation function'''
-@router.message(F.text == 'Да, это мои данные')
-async def verification_true(message: Message):
-    await message.answer('Добавьте чек с оплаты')
-    await message.answer('Ваши данные собираются...')
-    await message.answer('Анкета с его данными')
