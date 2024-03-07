@@ -18,12 +18,31 @@ class Reg(StatesGroup):
 #CONSTANS:
 name = ''
 adress = ''
+articul = ''
 
 
 '''
 idias:
     очистка корзины
 '''
+
+class Articules:
+    articules_dict_name = {
+        '563564645645': 'shoes 1',
+        '5646764746746': 'shoes 2',
+        '564465556666': 'shoes 3',
+        '564465559999': 'shoes 4'
+        }
+
+
+    articules_dict_prize = {
+        'shoes 1': '77$',
+        'shoes 2': '86$',
+        'shoes 3': '76$',
+        'shoes 4': '97$'
+    }
+
+
 
 class Buttons: 
     menu_button = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='Корзина 🛒')],
@@ -56,30 +75,41 @@ class Buttons:
     )
 
 
+
 router = Router()
 catalog_photo = FSInputFile('demo.jpg')
 
 
 @router.message(CommandStart())
 async def command_start_handler(message: Message) -> None:
-    await message.answer(f"Hello! Я бот длля продажи предметов в локальном магазине \n что бы перейти к выполнению заказа напиши 'В меню'", 
+    await message.answer(f"Hello! Я бот длля продажи предметов в локальном магазине \n что бы перейти к выполнению заказа напиши 'Корзина 🛒'", 
                          reply_markup=Buttons.menu_button)
 
 
 @router.message(F.text == 'Информация о нас 📃✏️')
 async def getcatalog(message: Message):
-    await message.answer('info about us')
+    await message.answer('''  - Donda Clothing
+        • С текущего момента все ваши посылки будут сохранять герметичность до момента передачи вам. Вы полностью сами вскроете посылку
+        • Площадка 95 - это аналог всеми известной русской площадки 📱, только в Китае. Огромное количество позиций начиная с носков Nike заканчивая Nike AJ1 Dior. Все вещи проходят обязательный Legit Check, этим занимается Poizon 🛒
+        • Площадка Taobao, о ней слова излишни. Там вы сможете найти абсолютно все необходимое. 
+        • Доставка по России и внутри Владимира. Мы предлагаем отправку ваших посылок транспортной компанией СДЭК, Почта России, Boxberry📦
+        • Курьер привезет вашу посылку в целостности и сохранности. Стоимости данных услуг уточняются индивидуально🤍
+
+        • Новая удобная группа с отзывами для наших новых клиентов ''')
 
 
 @router.message(F.text == 'Корзина 🛒')
 async def get_busket(message: Message):
-    await message.answer('функционал корзины',reply_markup=Buttons.busket_button)
+    await message.answer('Выбирите действия из доступных, для поиска товаров, их описания и артиклей переходите в нашу группу https://vk.******',reply_markup=Buttons.busket_button)
 
 
-@router.message(F.text == 'Добавить товар')
-async def add_item(message: Message, state: FSMContext):
-    await state.set_state(Reg.articul)
-    await message.answer('Принимается некое число, артикуль', reply_markup=Buttons.add_item_button)
+@router.message(commands=['add_item'])
+async def add_item(message: Message):
+    global item
+
+    await message.answer('Введите артикуль')
+    item = message.text
+    await message.answer(f'Ваш товар {Articules.articules_dict_name[str(articul)]} по стоимости - {Articules.articules_dict_prize[str(Articules.articules_dict_name[str(articul)])]}')
 
 
 @router.message(F.text == 'Перейти к оплате')
