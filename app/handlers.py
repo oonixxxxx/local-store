@@ -19,7 +19,13 @@ class Reg(StatesGroup):
 name = ''
 adress = ''
 
-class Buttons:
+
+'''
+idias:
+    очистка корзины
+'''
+
+class Buttons: 
     menu_button = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='Корзина 🛒')],
                                         [KeyboardButton(text='Информация о нас 📃✏️'), KeyboardButton(text='Контакт 📰')]],
             resize_keyboard=True,
@@ -43,6 +49,12 @@ class Buttons:
         resize_keyboard=True,
         input_field_placeholder='Выбирите ваш вариант'
     )
+
+    go_to_pay_button = ReplyKeyboardMarkup(keyboard=[
+        [KeyboardButton(text='/reg'), KeyboardButton(text='В меню')]],
+        resize_keyboard=True
+    )
+
 
 router = Router()
 catalog_photo = FSInputFile('demo.jpg')
@@ -73,7 +85,7 @@ async def add_item(message: Message, state: FSMContext):
 @router.message(F.text == 'Перейти к оплате')
 async def go_to_pay(message: Message):
     await message.answer('Ссылка на страцницу с оплатой')
-    await message.answer('Для ввода данных напишите "/reg"')
+    await message.answer('Для ввода данных напишите "/reg"', reply_markup=Buttons.go_to_pay_button)
 
 
 @router.message(F.text == 'Контакт 📰')
