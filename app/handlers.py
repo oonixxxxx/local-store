@@ -75,6 +75,11 @@ class Buttons:
         resize_keyboard=True
     )
 
+    about_us = ReplyKeyboardMarkup(keyboard=[
+        [KeyboardButton(text='В меню')]],
+        resize_keyboard=True
+    )
+
 
 
 router = Router()
@@ -96,7 +101,7 @@ async def getcatalog(message: Message):
         • Доставка по России и внутри Владимира. Мы предлагаем отправку ваших посылок транспортной компанией СДЭК, Почта России, Boxberry📦
         • Курьер привезет вашу посылку в целостности и сохранности. Стоимости данных услуг уточняются индивидуально🤍
 
-        • Новая удобная группа с отзывами для наших новых клиентов ''')
+        • Новая удобная группа с отзывами для наших новых клиентов ''', reply_markup=Buttons.about_us)
 
 
 @router.message(F.text == 'Корзина 🛒')
@@ -107,7 +112,7 @@ async def get_busket(message: Message):
 #    await message.answer(f'Ваш товар {Articules.articules_dict_name[str(articul)]} по стоимости - {Articules.articules_dict_prize[str(Articules.articules_dict_name[str(articul)])]}')
 
 
-@router.message(Command('add_item'))
+@router.message(F.text == 'Добавить товар')
 async def func_add_item(message: Message):
     await message.answer('add item')
 
@@ -129,9 +134,9 @@ async def get_menu(message: Message):
 
 @router.message(F.text == 'Да, это мои данные')
 async def verification_true(message: Message):
-    await message.answer('Добавьте чек с оплаты')
     await message.answer('Ваши данные собираются...')
-    await message.answer('Анкета с его данными')
+    await message.answer(f'Имя: {name} \nАдрес: {adress} \nОформил заказ на товар с артикулем "артикуль" "нейм товара" по стоимости "стоимость товара" \nЧек приложен:')
+    await message.answer('Для отправки заказа перешлите данное собщение с чеком оплаты в личные сообщения пользователю @bot_shop_example')
 
 
 @router.message(F.text == 'Нет, я хочу переписать их')
@@ -153,7 +158,7 @@ async def reg_one(message: Message, state: FSMContext):
 async def reg_second(message: Message, state: FSMContext):
     await state.update_data(name=message.text)
     await state.set_state(Reg.number)
-    await message.answer('Введите номер телефона')
+    await message.answer('Введите адрес')
 
 
 @router.message(Reg.number)
