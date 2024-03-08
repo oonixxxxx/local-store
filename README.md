@@ -23,3 +23,5 @@ text-box
 text-box
 рекомендация к заполнению:
 средства связи с владельцами магазина
+
+<video src='https://github.com/oonixxxxx/local-store/blob/main/assets/video.mp4' width=180/>
