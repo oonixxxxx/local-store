@@ -24,4 +24,4 @@ text-box
 рекомендация к заполнению:
 средства связи с владельцами магазина
 
-<video src='https://github.com/oonixxxxx/local-store/blob/main/assets/video.mp4' width=180/>
+![hippo]([https://media3.giphy.com/media/aUovxH8Vf9qDu/giphy.gif](https://github.com/oonixxxxx/local-store/blob/main/assets/video.gif)https://github.com/oonixxxxx/local-store/blob/main/assets/video.gif)
