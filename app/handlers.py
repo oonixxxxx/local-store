@@ -187,5 +187,4 @@ async def second_three(message: Message, state: FSMContext):
     data = await state.get_data() #{'name': 'your name', 'number': 'number'}
     name = data['name']
     adress = data['number']
-    
-    await message.answer(f'Подтвердите ваши данные: \n Ваше имя: {name}, ваш адресс: {adress}', reply_markup=Buttons.verifcation)
+    await message.answer(f'Подтвердите ваши данные: \n Ваше имя иакое: {name}, ваш адресс: {adress}', reply_markup=Buttons.verifcation)
