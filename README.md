@@ -28,7 +28,9 @@
 средства связи с владельцами магазина
 
 пример работы бота:
+
+
 ![hippo](https://github.com/oonixxxxx/local-store/blob/main/assets/video.gif)
 
 использованные библиотеки:
-aiogram 3.4.1
+-aiogram 3.4.1
