@@ -89,6 +89,10 @@ class Buttons:
     )
 
 
+def return_anketa(name, adress):
+    return f'Имя: {name} \nАдрес: {adress} \nОформил заказ на товар с артикулем "артикуль" "нейм товара" по стоимости "стоимость товара" \nЧек приложен:'
+
+
 router = Router()
 
 @router.message(CommandStart())
@@ -149,7 +153,7 @@ async def get_menu(message: Message):
 @router.message(F.text == 'Да, это мои данные✅')
 async def verification_true(message: Message):
     await message.answer('Ваши данные собираются...')
-    await message.answer(f'Имя: {name} \nАдрес: {adress} \nОформил заказ на товар с артикулем "артикуль" "нейм товара" по стоимости "стоимость товара" \nЧек приложен:')
+    await message.answer(str(return_anketa(name, adress)))
     await message.answer('Для отправки заказа перешлите данное собщение с чеком оплаты в личные сообщения пользователю @bot_shop_example')
 
 
