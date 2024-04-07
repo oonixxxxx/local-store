@@ -35,6 +35,7 @@ class Buttons:
         resize_keyboard=True
     )
 
-    bool_button = ReplyKeyboardMarkup(keyboard=[[]],
+    bool_button = ReplyKeyboardMarkup(keyboard=[
+        [KeyboardButton(text='В меню🧑🏿‍💻🗂')]],
         resize_keyboard=True
     )

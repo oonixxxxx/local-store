@@ -42,11 +42,11 @@ async def get_busket(message: Message):
 
 @router.message(F.text == 'Контакт 📰')
 async def get_contact(message: Message):
-    await message.answer(str(contact_text))
+    await message.answer(str(contact_text), reply_markup=Buttons.bool_button)
 
 @router.message(F.text == 'Добавить товар🛍')
 async def func_add_item(message: Message):
-    await message.answer('add item')
+    await message.answer('add item', reply_markup=Buttons.bool_button)
 
 @router.message(F.text == 'Перейти к оплате💰💳')
 async def go_to_pay(message: Message):
@@ -59,11 +59,11 @@ async def go_to_pay(message: Message):
 async def verification_true(message: Message):
     await message.answer('Ваши данные собираются...')
     await message.answer(str(return_anketa(name, adress)))
-    await message.answer('Для отправки заказа перешлите данное собщение с чеком оплаты в личные сообщения пользователю @bot_shop_example')
+    await message.answer('Для отправки заказа перешлите данное собщение с чеком оплаты в личные сообщения пользователю @bot_shop_example', reply_markup=Buttons.bool_button)
 
 @router.message(F.text == 'Нет, я хочу переписать их❌')
 async def not_true_verification(message: Message):
-    await message.answer('Введите "/reg", чтобы перезаписать ваши данные', one_time_keyboard=True)
+    await message.answer('Введите "/reg", чтобы перезаписать ваши данные', reply_markup=Buttons.bool_button)
 
 
 '''
