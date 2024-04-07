@@ -1,6 +1,7 @@
-dictionary_of_articuls = {
+'''dictionary_of_articuls = {
     'articul': 'name of shoes'
-}
+    'name of shoes': 'cost'
+}'''
 
 class Articules:
     articules_dict_name = {
