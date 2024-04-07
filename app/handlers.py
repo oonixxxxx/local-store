@@ -7,6 +7,7 @@ from aiogram.fsm.context import FSMContext
 
 from basic_text import main_page_text, contact_text
 from app.other.buttons import Buttons
+from app.other.functions import return_anketa
 
 class Reg(StatesGroup):
     name = State()
