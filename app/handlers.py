@@ -19,10 +19,6 @@ name = ''
 adress = ''
 articul = ''
 
-def return_anketa(name, adress):
-    return f'Имя: {name} \nАдрес: {adress} \nОформил заказ на товар с артикулем "артикуль" "нейм товара" по стоимости "стоимость товара" \nЧек приложен:'
-
-
 router = Router()
 
 @router.message(CommandStart())
@@ -53,7 +49,7 @@ async def func_add_item(message: Message):
 
 @router.message(F.text == 'Перейти к оплате💰💳')
 async def go_to_pay(message: Message):
-    await message.answer('Корзина: \n"name", "articul", "prize".')
+    await message.answer(f'Корзина:')
     await message.answer('Общаю сумма: "finaly_prize"')
     await message.answer('Ссылка на страцницу с оплатой')
     await message.answer('Для ввода данных напишите "/reg"', reply_markup=Buttons.go_to_pay_button)
