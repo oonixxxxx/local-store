@@ -1,4 +1,3 @@
-from os import name
 from aiogram import F, Router
 
 from aiogram.filters import CommandStart, Command

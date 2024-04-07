@@ -1,11 +1,4 @@
-from os import name
-from aiogram import F, Router
-
-from aiogram.filters import CommandStart, Command
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, Message
-from aiogram import types
-from aiogram.fsm.state import StatesGroup, State
-from aiogram.fsm.context import FSMContext
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 class Buttons: 
     menu_button = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='Корзина 🛒')],
