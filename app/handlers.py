@@ -2,12 +2,11 @@ from os import name
 from aiogram import F, Router
 
 from aiogram.filters import CommandStart, Command
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, Message
-from aiogram import types
+from aiogram.types import Message
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.context import FSMContext
 
-from basic_text import main_page_text
+from basic_text import main_page_text, contact_text
 from app.other.buttons import Buttons
 
 class Reg(StatesGroup):
@@ -32,23 +31,26 @@ async def command_start_handler(message: Message) -> None:
     await message.answer(f"Hello! Я бот длля продажи предметов в локальном магазине \n что бы перейти к выполнению заказа напиши 'Корзина 🛒'", 
                          reply_markup=Buttons.menu_button)
 
+@router.message(F.text == 'В меню🧑🏿‍💻🗂')
+async def get_menu(message: Message):
+    await message.answer(str(main_page_text), reply_markup=Buttons.menu_button)
 
 @router.message(F.text == 'Информация о нас 📃✏️')
 async def getcatalog(message: Message):
     await message.answer(str(main_page_text), reply_markup=Buttons.about_us, one_time_keyboard=True)
 
-
 @router.message(F.text == 'Корзина 🛒')
 async def get_busket(message: Message):
     await message.answer('Выбирите действия из доступных, для поиска товаров, их описания и артиклей переходите в нашу группу https://vk.******',reply_markup=Buttons.busket_button)
-
 #    await message.answer(f'Ваш товар {Articules.articules_dict_name[str(articul)]} по стоимости - {Articules.articules_dict_prize[str(Articules.articules_dict_name[str(articul)])]}')
 
+@router.message(F.text == 'Контакт 📰')
+async def get_contact(message: Message):
+    await message.answer(str(contact_text))
 
 @router.message(F.text == 'Добавить товар🛍')
 async def func_add_item(message: Message):
     await message.answer('add item')
-
 
 @router.message(F.text == 'Перейти к оплате💰💳')
 async def go_to_pay(message: Message):
@@ -57,28 +59,15 @@ async def go_to_pay(message: Message):
     await message.answer('Ссылка на страцницу с оплатой')
     await message.answer('Для ввода данных напишите "/reg"', reply_markup=Buttons.go_to_pay_button)
 
-
-@router.message(F.text == 'Контакт 📰')
-async def get_contact(message: Message):
-    await message.answer('Функция контакты')
-
-
-@router.message(F.text == 'В меню🧑🏿‍💻🗂')
-async def get_menu(message: Message):
-    await message.answer(str(main_page_text), reply_markup=Buttons.menu_button)
-
-
 @router.message(F.text == 'Да, это мои данные✅')
 async def verification_true(message: Message):
     await message.answer('Ваши данные собираются...')
     await message.answer(str(return_anketa(name, adress)))
     await message.answer('Для отправки заказа перешлите данное собщение с чеком оплаты в личные сообщения пользователю @bot_shop_example')
 
-
 @router.message(F.text == 'Нет, я хочу переписать их❌')
 async def not_true_verification(message: Message):
     await message.answer('Введите "/reg", чтобы перезаписать ваши данные', one_time_keyboard=True)
-
 
 
 '''
