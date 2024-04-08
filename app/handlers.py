@@ -38,15 +38,10 @@ async def getcatalog(message: Message):
 @router.message(F.text == 'Корзина 🛒')
 async def get_busket(message: Message):
     await message.answer('Выбирите действия из доступных, для поиска товаров, их описания и артиклей переходите в нашу группу https://vk.******',reply_markup=Buttons.busket_button)
-#    await message.answer(f'Ваш товар {Articules.articules_dict_name[str(articul)]} по стоимости - {Articules.articules_dict_prize[str(Articules.articules_dict_name[str(articul)])]}')
 
 @router.message(F.text == 'Контакт 📰')
 async def get_contact(message: Message):
     await message.answer(str(contact_text), reply_markup=Buttons.bool_button)
-
-@router.message(F.text == 'Добавить товар🛍')
-async def func_add_item(message: Message):
-    await message.answer('add item', reply_markup=Buttons.bool_button)
 
 @router.message(F.text == 'Перейти к оплате💰💳')
 async def go_to_pay(message: Message):
@@ -57,7 +52,6 @@ async def go_to_pay(message: Message):
 
 @router.message(F.text == 'Да, это мои данные✅')
 async def verification_true(message: Message):
-    await message.answer('Ваши данные собираются...')
     await message.answer(str(return_anketa(name, adress)))
     await message.answer('Для отправки заказа перешлите данное собщение с чеком оплаты в личные сообщения пользователю @bot_shop_example', reply_markup=Buttons.bool_button)
 
@@ -73,15 +67,13 @@ docstring
 @router.message(Command('reg'))
 async def reg_one(message: Message, state: FSMContext):
     await state.set_state(Reg.name)
-    await message.answer('Введите ваше имя для связи:', reply_markup=Buttons.bool_button)
-
+    await message.answer('Введите артикул выбранного товара: ', reply_markup=Buttons.bool_button)
 
 @router.message(Reg.name)
 async def reg_second(message: Message, state: FSMContext):
     await state.update_data(name=message.text)
     await state.set_state(Reg.number)
     await message.answer('Введите ваш номер для связи:')
-
 
 @router.message(Reg.number)
 async def second_three(message: Message, state: FSMContext):
@@ -94,4 +86,4 @@ async def second_three(message: Message, state: FSMContext):
     data = await state.get_data() #{'name': 'tag', 'number': 'comment'}
     name = data['name']
     adress = data['number']
-    await message.answer(f'Подтвердите ваши данные: \n Ваше имя: {name}, ваш номер для обратной связи: {adress}', reply_markup=Buttons.verifcation)
+    await message.answer(f'Подтвердите ваши данные: \nАртикул товара,которого вы хотите заказать: {name}, ваш номер для обратной связи: {adress}', reply_markup=Buttons.verifcation)
