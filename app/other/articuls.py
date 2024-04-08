@@ -12,7 +12,7 @@ class Articules:
         }
 
 
-    articules_dict_prize = {
+    name_dict_prize = {
         'shoes 1': '77$',
         'shoes 2': '86$',
         'shoes 3': '76$',

@@ -5,5 +5,5 @@ def get_finally_summ(lst_articules):
     result = 0
     for i in lst_articules:
         result += int(i)
-
-    return int(result)
+    
+    return  result
