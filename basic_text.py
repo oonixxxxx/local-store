@@ -7,4 +7,4 @@ main_page_text = '''  - Donda Clothing
 
         • Новая удобная группа с отзывами для наших новых клиентов '''
 
-contact_text = ''
+contact_text = 'Наши контакты: \nТел.:+79******** \nПочта: example@gmail.com'
