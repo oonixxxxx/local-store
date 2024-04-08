@@ -73,14 +73,14 @@ docstring
 @router.message(Command('reg'))
 async def reg_one(message: Message, state: FSMContext):
     await state.set_state(Reg.name)
-    await message.answer('Введите ваше имя', reply_markup=Buttons.bool_button)
+    await message.answer('Введите ваше имя для связи:', reply_markup=Buttons.bool_button)
 
 
 @router.message(Reg.name)
 async def reg_second(message: Message, state: FSMContext):
     await state.update_data(name=message.text)
     await state.set_state(Reg.number)
-    await message.answer('Введите адрес')
+    await message.answer('Введите ваш номер для связи:')
 
 
 @router.message(Reg.number)
@@ -91,7 +91,7 @@ async def second_three(message: Message, state: FSMContext):
     
     await state.update_data(number=message.text)
     await message.answer('Регистрация прошла успешно')
-    data = await state.get_data() #{'name': 'your name', 'number': 'number'}
+    data = await state.get_data() #{'name': 'tag', 'number': 'comment'}
     name = data['name']
     adress = data['number']
-    await message.answer(f'Подтвердите ваши данные: \n Ваше имя иакое: {name}, ваш адресс: {adress}', reply_markup=Buttons.verifcation)
+    await message.answer(f'Подтвердите ваши данные: \n Ваше имя: {name}, ваш номер для обратной связи: {adress}', reply_markup=Buttons.verifcation)
